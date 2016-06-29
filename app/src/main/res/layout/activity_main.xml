@@ -28,7 +28,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Menue"
+        android:text="Menu"
         android:textSize="20sp"
         android:id="@+id/menueButton"
         android:textColor="@color/abc_secondary_text_material_dark"
