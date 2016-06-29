@@ -1,5 +1,6 @@
 package com.epicodus.laurettajeans;
 
+import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.support.v4.Shadows;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -30,5 +33,14 @@ public class MainActivityTest {
     public void validateTextViewContent() {
         TextView mainTextView = (TextView) activity.findViewById(R.id.AppNameTextView);
         assertTrue("LaurettaJean's".equals(mainTextView.getText().toString()));
+    }
+
+    @Test
+    public void secondActivityStarted() {
+        activity.findViewById(R.id.menueButton).performClick();
+        Intent expectedIntent = new Intent(activity, MenuActivity.class);
+        ShadowActivity shadowActivit = org.robolectric.Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivit.getNextStartedActivity();
+        assertTrue(actualIntent.filterEquals(expectedIntent));
     }
 }
